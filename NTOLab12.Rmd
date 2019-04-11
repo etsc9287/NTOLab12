@@ -12,15 +12,86 @@ gapminder <- gapminder
 ```
 ```{r, echo=FALSE}
 
+
+randomization <- function(values,n1){
+ 
+  z <- c(rep(0,length(values))) 
+  # random genreation of numbers should be defined outside this function.
+    rand <- sample(values,n1)
+
+  for(i in seq_along(values)){
+  if(isFALSE(values[i] %in% rand)){
+    z[i] <- values[i]
+  }}
+  z <- z[ z != 0 ]
+print(rand) 
+print(z)
+  
+}
+
+z <- randomization(c(1:10),4)
+
+```
+
+```{r}
 perm_mean <- function(perms, values, n1)
 {
+## step one
+  meandiff<- c(rep(0,perms))
+  zero <- c(rep(0,perms))
+  
+print(meandiff)
+  
+  # Loop throught number of permutations
+  for (i in c(1:perms))
+  {
+    # Step 2:
+   z <- c(rep(0,length(values))) 
+  # random genreation of numbers should be defined outside this function.
+    rand <- sample(values,n1)
+
+  for(i in seq_along(values)){
+  if(isFALSE(values[i] %in% rand)){
+    z[i] <- values[i]
+  }
+    }
+  z <- z[ z != 0 ]
+print(rand) 
+print(z)
+  
+
+    # Step 3:
+    z2 <- mean(z)
+    z1 <- mean(rand)
+ a <- z2-z1
+ meandiff[[i]]<- mean(a)
+
+    print(a)
+
+    # Step 4:
+  }
+
+  # Step 5: 
+   print(meandiff)
+
+  }
+  
+perm_mean(2,c(1:10),4)
+
+```
+
+```{r}
+perm_mean <- function(perms, values, n1)
+{
+  
   # Step 1:
   # Create vector of zeroes of length "perms" to store
   # permuted mean differnces
   zero <- c(rep(0,perms))
   z <- c(rep(0,length(values)))
 for( i in c(1:perms))
-{
+{ 
+  zero[i] <- i
  # Step 2:
     # Randomly separate vector "values" into disjoint 
     # groups of size "n1" and "length(values) - n1" respectively
@@ -34,7 +105,7 @@ for( i in c(1:perms))
 
 }
 z <- z[ z != 0 ]
-      
+yeet <- tibble(interations = zero, random= c(randn1), rest = c(z))
   }# Step 3:
     # Compute the sample means for the two groups from 
  
@@ -45,8 +116,7 @@ z <- z[ z != 0 ]
     # value in the vector from step 1
    print(randn1) 
    print(z)
-  
-
+  print(yeet)
   }
 
   
