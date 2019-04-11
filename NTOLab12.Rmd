@@ -5,26 +5,59 @@ date: "4/9/2019"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r,echo = FALSE}
+library(tidyverse)
+library(gapminder)
+gapminder <- gapminder
+```
+```{r, echo=FALSE}
+
+perm_mean <- function(perms = 1000, values, n1)
+{
+  # Step 1:
+  # Create vector of zeroes of length "perms" to store
+  # permuted mean differnces
+  zero <- c(rep(0,perms))
+  z <- c(rep(0,length(values)))
+for( i in c(1:perms))
+{
+ # Step 2:
+    # Randomly separate vector "values" into disjoint 
+    # groups of size "n1" and "length(values) - n1" respectively
+  randn1 <- sample(values,n1)
+
+  for(i in seq_along(values)){
+  if(isFALSE(values[i] %in% randn1)){
+    z[i] <- values[i]
+  }
+
+
+}
+
+      
+  }# Step 3:
+    # Compute the sample means for the two groups from 
+ 
+    # step 2
+    
+    # Step 4: 
+    # Compute the difference in sample means, store the
+    # value in the vector from step 1
+   print(randn1) 
+   print(z)
+   print(b)
+
+  }
+
+  
+
+  # Step 5:
+  # Return new updated vector, created in step 1
+  
+perm_mean(perms = 1, c(1,4,8,3,7,9,2,6,5,10), 5)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
-```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
