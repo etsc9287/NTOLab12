@@ -43,10 +43,10 @@ perm_mean <- function(perms, values, n1)
  print(result)
   }
 
-test1 <- perm_mean(1000,c(1:100),50)
+#test1 <- perm_mean(1000,c(1:100),50)
 
-ggplot(data = test1, mapping = aes(x= value))+
-  geom_density()
+#ggplot(data = test1, mapping = aes(x= value))+
+ # geom_density()
 
 ```
 
@@ -67,7 +67,7 @@ for( i in c(1:perms))
 result <- as.tibble(result)
 print(result)
 }
-perm_cor(100,c(1:10),c(1:10))
+#perm_cor(100,c(1:10),c(1:10))
 
 ```
 
@@ -173,7 +173,8 @@ ggplot(data= mean,mapping = aes(x=value))+
 #### Who did what
 *****
 
-* David:
+* David: Wrote Permutation Mean Test Function and helped Ryan with the Permutaion Corrleation Test Function.
+Helped Anderson with the graphing the distribution of perm mean and per cor for our questions. Added vertical lines to graphs to show percentile Vs. actual. Did some overall edits. 
 
 * Ethan:
 
