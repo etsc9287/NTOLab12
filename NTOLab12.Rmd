@@ -10,124 +10,51 @@ library(tidyverse)
 library(gapminder)
 gapminder <- gapminder
 ```
-```{r, echo=FALSE}
-
-
-randomization <- function(values,n1){
- 
-  z <- c(rep(0,length(values))) 
-  # random genreation of numbers should be defined outside this function.
-    rand <- sample(values,n1)
-
-  for(i in seq_along(values)){
-  if(isFALSE(values[i] %in% rand)){
-    z[i] <- values[i]
-  }}
-  z <- z[ z != 0 ]
-print(rand) 
-print(z)
-  
-}
-
-z <- randomization(c(1:10),4)
-
-```
 
 ```{r}
 perm_mean <- function(perms, values, n1)
 {
 ## step one
-  meandiff<- c(rep(0,perms))
-  zero <- c(rep(0,perms))
-  
-print(meandiff)
+  result <- vector("numeric", perms)
   
   # Loop throught number of permutations
-  for (i in c(1:perms))
+  for (i in 1:perms)
   {
-    # Step 2:
-   z <- c(rep(0,length(values))) 
-  # random genreation of numbers should be defined outside this function.
-    rand <- sample(values,n1)
-
-  for(i in seq_along(values)){
-  if(isFALSE(values[i] %in% rand)){
-    z[i] <- values[i]
-  }
-    }
-  z <- z[ z != 0 ]
-print(rand) 
-print(z)
+    x <- sample(1:length(values), n1)
   
+  group1 <- values[x]
+  group2 <- values[-x]
 
-    # Step 3:
-    z2 <- mean(z)
-    z1 <- mean(rand)
- a <- z2-z1
- meandiff[[i]]<- mean(a)
-
-    print(a)
-
+  diff <- mean(group1)-mean(group2)
+  result[i] <- diff
     # Step 4:
-  }
-
-  # Step 5: 
-   print(meandiff)
 
   }
-  
-perm_mean(2,c(1:10),4)
+  # Step 5:
+ result <- as.tibble(result)
+ print(result)
+  }
+
+test1 <- perm_mean(1000,c(1:100),50)
+
+ggplot(data = test1, mapping = aes(x= value))+
+  geom_density()
 
 ```
 
 ```{r}
-perm_mean <- function(perms, values, n1)
-{
-  
-  # Step 1:
-  # Create vector of zeroes of length "perms" to store
-  # permuted mean differnces
-  zero <- c(rep(0,perms))
-  z <- c(rep(0,length(values)))
+perm_cor <- function(perms,x,y){
+  result <- vector("numeric",perms)
+
 for( i in c(1:perms))
-{ 
-  zero[i] <- i
- # Step 2:
-    # Randomly separate vector "values" into disjoint 
-    # groups of size "n1" and "length(values) - n1" respectively
-  randn1 <- sample(values,n1)
-
-  for(i in seq_along(values)){
-  if(isFALSE(values[i] %in% randn1)){
-    z[i] <- values[i]
-  }
-
-
+{
+  y <- sample(y,length(y))
+  c <- cor(x,y)
+  result[i] <- c
 }
-z <- z[ z != 0 ]
-yeet <- tibble(interations = zero, random= c(randn1), rest = c(z))
-  }# Step 3:
-    # Compute the sample means for the two groups from 
- 
-    # step 2
-    
-    # Step 4: 
-    # Compute the difference in sample means, store the
-    # value in the vector from step 1
-   print(randn1) 
-   print(z)
-  print(yeet)
-  }
+result <- as.tibble(result)
+print(result)
+}
+perm_cor(100,c(1:10),c(1:10))
 
-  
-
-  # Step 5:
-  # Return new updated vector, created in step 1
-  
-perm_mean(1, c(1,4,8,3,7,9,2,6,5,10), 5)
 ```
-
-
-
-
-
