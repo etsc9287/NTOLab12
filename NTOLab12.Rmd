@@ -140,7 +140,7 @@ p <- ggplot(data=cor,mapping = aes(x=value))+
  p 
 
 ```
-```{r}
+```{r, echo=FALSE}
 cor <- perm_cor(1000,country_stats2$avg_pop, country_stats2$avg_GDP)
 r <- quantile(cor$value,.95)
 r2d2 <- cor(country_stats2$avg_pop,country_stats2$avg_GDP)
@@ -154,7 +154,7 @@ p <- ggplot(data=cor,mapping = aes(x=value))+
  p 
 
 ```
-```{r}
+```{r, echo = FALSE}
 mean <- perm_mean(1000,GDPdifference$gdp_difference,(length(GDPdifference$gdp_difference))/2)
 r <- quantile(mean$value,.95)
 r2d2 <- mean(GDPdifference$gdp_difference)
@@ -177,8 +177,8 @@ ggplot(data= mean,mapping = aes(x=value))+
 
 * Ethan:
 
-* Ryan:
+* Ryan: Helped finalize second function
 
 * Anderson:
 
-* Arie:
+* Arie: Helped with formatting and explanations, wrote questions
