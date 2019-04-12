@@ -10,11 +10,11 @@ library(gapminder)
 gapminder <- gapminder
 ```
 *****
-#### Overall Questions/Conclusion
+#### Overall Questions
 *****
 * Question(Two-Sample Permutation test): From 1957-2007, how does the mean difference of GDP change over time between the United States and China, India, Japan, South Korea, and Indonesia? This question is important and interesting because over time it will show if the GDP per capita of the asain countries catch up to the GDP per capita of the United States, as well as how GDP was impacted by events in history.
 
-* Question(Correlation Permutation test): Is there a correlation bewteen GDP per capita and life expectancy? This question is important because it will give us a better understanding of which countries struggle to get better access to health care, education etc. This question is also interesting because it can help policy makers decide what action to take to advance the country the represent. 
+* Question(Correlation Permutation test): Is there a correlation bewteen GDP per capita and life expectancy? This question is important because it will give us a better understanding of which countries struggle to get better access to health care, education etc. This question is also interesting because it can help policy makers decide what action to take to advance the country they represent. 
 
 *****
 #### Two-Sample Permuatation test function
@@ -100,7 +100,12 @@ ggplot(data = GDPdifference) +
   xlab("Year") +
   ylab("GDP per Capita Difference") +
   ggtitle("GDP per Capita Difference between USA and Asian Countries Over Time", subtitle = "Asian Countries Include: China, India, Japan, Indonesia, South Korea (top 5 Asia GDP's)")
+```
 
+* Explanation: This graph relates to our first question "Is there a statistically significant difference in the means between GDP per capita of the US and average GDP per capita of the 5 largest Asian economies?".  We first calculated the average GDP per capita of China, India, Japan, South Korea, and Indonesia for each year in 5 year intervals as one column, the GDP per capita of the US for each of these years as another column, and the difference between these values as the third column.  Finally, we plotted this difference over the timespan (1952-2007) and found that it has increased at a pretty consistent rate.
+
+
+```{r, echo = FALSE}
 #Correlation Permutation: GDP per Capita vs. Life Expectancy
 
 country_stats <- countries %>%
@@ -126,7 +131,7 @@ ggplot(data = country_stats2) +
   ggtitle("Avg GDP per Capita vs. Avg Life Expectancy for Every Country (1952-2007)")
 ```
 
-* Explanation: This graph relates to our second question "Is there a correlation bewteen GDP per capita and life expectancy?" From this graph we found that there was a correlation of .6 between GDP per capita and life expectancy. Therfore, we can say that there is a strong positive correlation. This makes sense because richer countries have better access to health care.
+* Explanation: This graph relates to our second question "Is there a correlation bewteen GDP per capita and life expectancy?" We plotted average GDP per capita on the x-axis against average life expectancy on the y-axis throughout the timeframe of 1952-2007, where each point iteslf represents each country, the color of the point represents the continent, and the size of the point represents the average population of the country. From this graph we found that there was a correlation of .6 between GDP per capita and life expectancy, implying a strong positive correlation. This makes sense because richer countries have better access to health care.  
 
 ****
 #### Permutation Mean Test
@@ -177,6 +182,7 @@ ggplot(data= mean,mapping = aes(x=value))+
   annotate("text",x=r2d2-1500,y=-.000005,label = paste(round(r2d2, digits=2), "actual"))
 
 ```
+
 *****
 #### Conclusion
 *****
@@ -192,7 +198,7 @@ There is a positive correlation between life expectancy and GDP per capita. The 
 * David: Wrote Permutation Mean Test Function and helped Ryan with the Permutaion Corrleation Test Function.
 Helped Anderson with the graphing the distribution of perm mean and per cor for our questions. Added vertical lines to graphs to show percentile Vs. actual. Did some overall edits. 
 
-* Ethan:
+* Ethan: Made the whole pre-permutation analysis section
 
 * Ryan: Helped finalize second function
 
