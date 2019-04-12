@@ -5,15 +5,10 @@ date: "4/12/2019"
 output: html_document
 ---
 ```{r,echo = FALSE, message=FALSE}
->>>>>>> master
 library(tidyverse)
 library(gapminder)
 gapminder <- gapminder
 ```
-<<<<<<< HEAD
-
-```{r}
-=======
 *****
 #### Overall Questions/Conclusion
 *****
@@ -54,15 +49,10 @@ ggplot(data = test1, mapping = aes(x= value))+
   geom_density()
 
 ```
-<<<<<<< HEAD
-
-```{r}
-=======
 *****
 #### Correlation Permutation Test
 *****
 ```{r, echo=FALSE}
->>>>>>> master
 perm_cor <- function(perms,x,y){
   result <- vector("numeric",perms)
 
