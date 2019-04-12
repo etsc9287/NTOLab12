@@ -188,8 +188,10 @@ ggplot(data= mean,mapping = aes(x=value))+
 *****
 
 * Conclusion (Correlation Permutation Test) :
-There is a positive correlation between life expectancy and GDP per capita. The plot coneys the average GDP and life expectancy correlation for all countries. The red line in the plot shows the ninety-fifth percentile which is all of our significant data. The blue line showing our actual correlation is to the right of the red line meaning that the actual correlation and data between GDP per capita and life expectancy is meaningful and positive.
+There is a positive correlation between life expectancy and GDP per capita. The plot coneys the average GDP and life expectancy correlation for all countries. The blue line in the plot shows the ninety-fifth percentile which is all of our significant data. The red line showing our actual correlation is to the right of the red line meaning that the actual correlation and data between GDP per capita and life expectancy is meaningful and positive.
 
+Conclusion (Two-Sample Permutation Test):
+The mean difference between the USA and countries in Asia is shown to be significant. We decided to plot the mean of the difference in the average GDP of the USA subtracted against the average GDP in various countries of Asia. The blue line in the plot shows at what value the data becomes significant, and the red line to the right of the blue is our actual data which has a value higher than the significant number the graph gives us. In conclusion since the actual data fits the ninety-fifth percentile it becomes significant.
 
 *****
 #### Who did what
