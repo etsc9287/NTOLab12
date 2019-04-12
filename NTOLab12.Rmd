@@ -124,6 +124,49 @@ ggplot(data = country_stats2) +
   ggtitle("Avg GDP per Capita vs. Avg Life Expectancy for Every Country (1952-2007)")
 ```
 
+```{r,echo=FALSE}
+cor <- perm_cor(1000,country_stats2$avg_lifeExp, country_stats2$avg_GDP)
+r <- quantile(cor$value,.95)
+r2d2 <- cor(country_stats2$avg_lifeExp,country_stats2$avg_GDP)
+
+  
+p <- ggplot(data=cor,mapping = aes(x=value))+
+  geom_density(size = 1)+
+  geom_vline(xintercept = r,color="blue",size = 1)+geom_vline(xintercept = r2d2,color="red",size = 1)+
+  geom_point(x= r, y= 0) + annotate("text",,x=r,y=-.1,label = paste(round(r, digits=3), "= .95 Percentile"))+
+  annotate("text",,x=r2d2,y=-.1,label = paste(round(r2d2, digits=2), "actual cor"))
+ p 
+
+```
+```{r}
+cor <- perm_cor(1000,country_stats2$avg_pop, country_stats2$avg_GDP)
+r <- quantile(cor$value,.95)
+r2d2 <- cor(country_stats2$avg_pop,country_stats2$avg_GDP)
+
+  
+p <- ggplot(data=cor,mapping = aes(x=value))+
+  geom_density(size = 1)+
+  geom_vline(xintercept = r,color="blue",size = 1)+geom_vline(xintercept = r2d2,color="red",size = 1)+
+  geom_point(x= r, y= 0) + annotate("text",x=r,y=-.1,label = paste(round(r, digits=3), "= .95 Percentile"))+
+  annotate("text",x=r2d2,y=-.1,label = paste(round(r2d2, digits=2), "actual cor"))
+ p 
+
+```
+```{r}
+mean <- perm_mean(1000,GDPdifference$gdp_difference,(length(GDPdifference$gdp_difference))/2)
+r <- quantile(mean$value,.95)
+r2d2 <- mean(GDPdifference$gdp_difference)
+
+
+ggplot(data= mean,mapping = aes(x=value))+
+  geom_density(size = 1)+
+  geom_vline(xintercept = r,color="blue",size = 1)+ geom_vline(xintercept = r2d2,color="red",size = 1)+
+   geom_point(x= r, y= 0) + annotate("text",x=r,y=-.000005,label = paste(round(r, digits=3), "= .95 Percentile"))+
+  annotate("text",x=r2d2-1500,y=-.000005,label = paste(round(r2d2, digits=2), "actual"))
+
+```
+
+
 *****
 #### Who did what
 *****
