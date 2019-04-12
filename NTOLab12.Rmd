@@ -100,7 +100,12 @@ ggplot(data = GDPdifference) +
   xlab("Year") +
   ylab("GDP per Capita Difference") +
   ggtitle("GDP per Capita Difference between USA and Asian Countries Over Time", subtitle = "Asian Countries Include: China, India, Japan, Indonesia, South Korea (top 5 Asia GDP's)")
+```
 
+* Explanation: This graph relates to our first question "Is there a statistically significant difference in the means between GDP per capita of the US and average GDP per capita of the 5 largest Asian economies?".  We first calculated the average GDP per capita of China, India, Japan, South Korea, and Indonesia for each year in 5 year intervals as one column, the GDP per capita of the US for each of these years as another column, and the difference between these values as the third column.  Finally, we plotted this difference over the timespan (1952-2007) and found that it has increased at a pretty consistent rate.
+
+
+```{r, echo = FALSE}
 #Correlation Permutation: GDP per Capita vs. Life Expectancy
 
 country_stats <- countries %>%
@@ -126,7 +131,7 @@ ggplot(data = country_stats2) +
   ggtitle("Avg GDP per Capita vs. Avg Life Expectancy for Every Country (1952-2007)")
 ```
 
-* Explanation: This graph relates to our second question "Is there a correlation bewteen GDP per capita and life expectancy?" From this graph we found that there was a correlation of .6 between GDP per capita and life expectancy. Therfore, we can say that there is a strong positive correlation. This makes sense because richer countries have better access to health care.
+* Explanation: This graph relates to our second question "Is there a correlation bewteen GDP per capita and life expectancy?" We plotted average GDP per capita on the x-axis against average life expectancy on the y-axis throughout the timeframe of 1952-2007, where each point iteslf represents each country, the color of the point represents the continent, and the size of the point represents the average population of the country. From this graph we found that there was a correlation of .6 between GDP per capita and life expectancy, implying a strong positive correlation. This makes sense because richer countries have better access to health care.  
 
 ****
 #### Permutation Mean Test
