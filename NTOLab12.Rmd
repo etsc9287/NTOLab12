@@ -142,9 +142,10 @@ p <- ggplot(data=cor,mapping = aes(x=value))+
   geom_vline(xintercept = r,color="blue",size = 1)+geom_vline(xintercept = r2d2,color="red",size = 1)+
   geom_point(x= r, y= 0) + annotate("text",,x=r,y=-.1,label = paste(round(r, digits=3), "= .95 Percentile"))+
   annotate("text",,x=r2d2,y=-.1,label = paste(round(r2d2, digits=2), "actual cor"))
- p 
+  
 
 ```
+
 ```{r, echo=FALSE}
 cor <- perm_cor(1000,country_stats2$avg_pop, country_stats2$avg_GDP)
 r <- quantile(cor$value,.95)
@@ -156,7 +157,7 @@ p <- ggplot(data=cor,mapping = aes(x=value))+
   geom_vline(xintercept = r,color="blue",size = 1)+geom_vline(xintercept = r2d2,color="red",size = 1)+
   geom_point(x= r, y= 0) + annotate("text",x=r,y=-.1,label = paste(round(r, digits=3), "= .95 Percentile"))+
   annotate("text",x=r2d2,y=-.1,label = paste(round(r2d2, digits=2), "actual cor"))
- p 
+  
 
 ```
 
