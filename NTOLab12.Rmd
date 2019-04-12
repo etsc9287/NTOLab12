@@ -17,9 +17,9 @@ gapminder <- gapminder
 * Question(Correlation Permutation test): Is there a correlation bewteen GDP per capita and life expectancy? This question is important because it will give us a better understanding of which countries struggle to get better access to health care, education etc. This question is also interesting because it can help policy makers decide what action to take to advance the country the represent. 
 
 *****
-#### Two-Sample Permuatation test
+#### Two-Sample Permuatation test function
 *****
-```{r, echo=FALSE, warning=FALSE}
+```{r}
 perm_mean <- function(perms, values, n1)
 {
 ## step one
@@ -40,21 +40,21 @@ perm_mean <- function(perms, values, n1)
   }
   # Step 5:
  result <- as.tibble(result)
- print(result)
+ #print(result)
   }
 
-test1 <- perm_mean(1000,c(1:100),50)
+#test1 <- perm_mean(1000,c(1:100),50)
 
-ggplot(data = test1, mapping = aes(x= value))+
-  geom_density()
+#ggplot(data = test1, mapping = aes(x= value))+
+ # geom_density()
 
 ```
 
 *****
-#### Correlation Permutation Test
+#### Correlation Permutation test function
 *****
 
-```{r, echo=FALSE}
+```{r}
 perm_cor <- function(perms,x,y){
   result <- vector("numeric",perms)
 
@@ -65,12 +65,14 @@ for( i in c(1:perms))
   result[i] <- c
 }
 result <- as.tibble(result)
-print(result)
+#print(result)
 }
-perm_cor(100,c(1:10),c(1:10))
+#perm_cor(100,c(1:10),c(1:10))
 
 ```
-
+****
+#### Pre-Permutation Analysis
+****
 ```{r, echo = FALSE}
 
 countries <- gapminder::gapminder_unfiltered
@@ -124,9 +126,12 @@ ggplot(data = country_stats2) +
   ggtitle("Avg GDP per Capita vs. Avg Life Expectancy for Every Country (1952-2007)")
 ```
 
-* Explanation: This graph relates to our second question "Is there a correlation bewteen GDP per capita and life expectancy?" From this graph we found that there was a correlation of .6 between GDP per capita and life expectancy. Therfore, we can say that there is a strong positive correlation. This makes sense because richer countries have better access to health care. 
+* Explanation: This graph relates to our second question "Is there a correlation bewteen GDP per capita and life expectancy?" From this graph we found that there was a correlation of .6 between GDP per capita and life expectancy. Therfore, we can say that there is a strong positive correlation. This makes sense because richer countries have better access to health care.
 
-```{r,echo=FALSE}
+****
+#### Permutation Mean Test
+****
+```{r,echo=FALSE,warning=FALSE}
 cor <- perm_cor(1000,country_stats2$avg_lifeExp, country_stats2$avg_GDP)
 r <- quantile(cor$value,.95)
 r2d2 <- cor(country_stats2$avg_lifeExp,country_stats2$avg_GDP)
@@ -140,7 +145,7 @@ p <- ggplot(data=cor,mapping = aes(x=value))+
  p 
 
 ```
-```{r}
+```{r, echo=FALSE}
 cor <- perm_cor(1000,country_stats2$avg_pop, country_stats2$avg_GDP)
 r <- quantile(cor$value,.95)
 r2d2 <- cor(country_stats2$avg_pop,country_stats2$avg_GDP)
@@ -154,7 +159,11 @@ p <- ggplot(data=cor,mapping = aes(x=value))+
  p 
 
 ```
-```{r}
+
+****
+#### Permutation Corelation Test
+****
+```{r,echo=FALSE}
 mean <- perm_mean(1000,GDPdifference$gdp_difference,(length(GDPdifference$gdp_difference))/2)
 r <- quantile(mean$value,.95)
 r2d2 <- mean(GDPdifference$gdp_difference)
@@ -179,12 +188,13 @@ There is a positive correlation between life expectancy and GDP per capita. The 
 #### Who did what
 *****
 
-* David:
+* David: Wrote Permutation Mean Test Function and helped Ryan with the Permutaion Corrleation Test Function.
+Helped Anderson with the graphing the distribution of perm mean and per cor for our questions. Added vertical lines to graphs to show percentile Vs. actual. Did some overall edits. 
 
 * Ethan:
 
-* Ryan:
+* Ryan: Helped finalize second function
 
 * Anderson:
 
-* Arie:
+* Arie: Helped with formatting and explanations, wrote questions
