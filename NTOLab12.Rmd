@@ -197,7 +197,7 @@ There is a positive correlation between life expectancy and GDP per capita. The 
 * David: Wrote Permutation Mean Test Function and helped Ryan with the Permutaion Corrleation Test Function.
 Helped Anderson with the graphing the distribution of perm mean and per cor for our questions. Added vertical lines to graphs to show percentile Vs. actual. Did some overall edits. 
 
-* Ethan: Made the tables/graphs for correlation and mean difference that didn't include permutation. 
+* Ethan: Made the whole pre-permutation analysis section
 
 * Ryan: Helped finalize second function
 
