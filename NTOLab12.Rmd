@@ -173,7 +173,7 @@ ggplot(data= mean,mapping = aes(x=value))+
 
 * David:
 
-* Ethan:
+* Ethan: Made the tables/graphs for correlation and mean difference that didn't include permutation. 
 
 * Ryan:
 
