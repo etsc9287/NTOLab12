@@ -1,17 +1,20 @@
 ---
 title: "NTOLab12"
-author: "Ethan"
-date: "4/9/2019"
+author: "Ethan, Anderson, David, Ryan Arie"
+date: "4/12/2019"
 output: html_document
 ---
-
-```{r,echo = FALSE}
+```{r,echo = FALSE, message=FALSE}
 library(tidyverse)
 library(gapminder)
 gapminder <- gapminder
 ```
+*****
+#### Two-Sample Permuatation test
+*****
 
-```{r}
+* Question: 
+```{r, echo=FALSE}
 perm_mean <- function(perms, values, n1)
 {
 ## step one
@@ -41,8 +44,12 @@ ggplot(data = test1, mapping = aes(x= value))+
   geom_density()
 
 ```
+*****
+#### Correlation Permutation Test
+*****
 
-```{r}
+* Question: 
+```{r, echo=FALSE}
 perm_cor <- function(perms,x,y){
   result <- vector("numeric",perms)
 
@@ -58,3 +65,16 @@ print(result)
 perm_cor(100,c(1:10),c(1:10))
 
 ```
+*****
+#### Who did what
+*****
+
+* David:
+
+* Ethan:
+
+* Ryan:
+
+* Anderson:
+
+* Arie:
