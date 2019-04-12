@@ -202,6 +202,6 @@ Helped Anderson with the graphing the distribution of perm mean and per cor for 
 
 * Ryan: Helped finalize second function
 
-* Anderson:
+* Anderson: Helped finalize first function, wrote conclusions
 
 * Arie: Helped with formatting and explanations, wrote questions
