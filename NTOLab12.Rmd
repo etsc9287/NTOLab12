@@ -12,9 +12,9 @@ gapminder <- gapminder
 *****
 #### Overall Questions/Conclusion
 *****
-* Question(Two-Sample Permutation test): From 1957-2007, how does the mean difference of GDP change over time between the United States and China, India, Japan, South Korea, and Indonesia? This question is important and interesting because over time it will show if the GDP per capita of the asain countries catch up to the GDP per capita of the United States.
+* Question(Two-Sample Permutation test): From 1957-2007, how does the mean difference of GDP change over time between the United States and China, India, Japan, South Korea, and Indonesia? This question is important and interesting because over time it will show if the GDP per capita of the asain countries catch up to the GDP per capita of the United States, as well as how GDP was impacted by events in history.
 
-* Question(Correlation Permutation test): What is the correlation bewteen GDP per capita and life expectancy? This question is important and interesting because 
+* Question(Correlation Permutation test): Is there a correlation bewteen GDP per capita and life expectancy? This question is important because it will give us a better understanding of which countries struggle to get better access to health care, education etc. This question is also interesting because it can help policy makers decide what action to take to advance the country the represent. 
 
 *****
 #### Two-Sample Permuatation test
@@ -123,6 +123,8 @@ ggplot(data = country_stats2) +
   ylab("Average Life Expectancy") +
   ggtitle("Avg GDP per Capita vs. Avg Life Expectancy for Every Country (1952-2007)")
 ```
+
+* Explanation: This graph relates to our second question "Is there a correlation bewteen GDP per capita and life expectancy?" From this graph we found that there was a correlation of .6 between GDP per capita and life expectancy. Therfore, we can say that there is a strong positive correlation. This makes sense because richer countries have better access to health care. 
 
 ```{r,echo=FALSE}
 cor <- perm_cor(1000,country_stats2$avg_lifeExp, country_stats2$avg_GDP)
