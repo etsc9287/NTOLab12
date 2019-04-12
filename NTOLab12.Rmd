@@ -84,7 +84,6 @@ print(result)
 perm_cor(100,c(1:10),c(1:10))
 
 ```
-<<<<<<< HEAD
 
 ```{r, echo = FALSE}
 
@@ -138,7 +137,7 @@ ggplot(data = country_stats2) +
   ylab("Average Life Expectancy") +
   ggtitle("Avg GDP per Capita vs. Avg Life Expectancy for Every Country (1952-2007)")
 ```
-=======
+
 *****
 #### Who did what
 *****
@@ -152,4 +151,3 @@ ggplot(data = country_stats2) +
 * Anderson:
 
 * Arie:
->>>>>>> master
