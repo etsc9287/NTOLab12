@@ -5,10 +5,15 @@ date: "4/12/2019"
 output: html_document
 ---
 ```{r,echo = FALSE, message=FALSE}
+>>>>>>> master
 library(tidyverse)
 library(gapminder)
 gapminder <- gapminder
 ```
+<<<<<<< HEAD
+
+```{r}
+=======
 *****
 #### Overall Questions/Conclusion
 *****
@@ -49,10 +54,15 @@ ggplot(data = test1, mapping = aes(x= value))+
   geom_density()
 
 ```
+<<<<<<< HEAD
+
+```{r}
+=======
 *****
 #### Correlation Permutation Test
 *****
 ```{r, echo=FALSE}
+>>>>>>> master
 perm_cor <- function(perms,x,y){
   result <- vector("numeric",perms)
 
@@ -68,6 +78,60 @@ print(result)
 perm_cor(100,c(1:10),c(1:10))
 
 ```
+
+```{r, echo = FALSE}
+
+countries <- gapminder::gapminder_unfiltered
+
+#Mean Difference Permutation
+
+asiaGDP <- countries %>%
+  filter(continent == "Asia") %>%
+  filter(country == "China" | country == "India" | country == "South Korea" | country == "Japan" | country == "Indonesia") %>%
+  select(country, year, gdpPercap) %>%
+  group_by(year) %>%
+  summarise(asia_avg_gdp = mean(gdpPercap))
+
+usaGDP <- countries %>%
+  filter(country == "United States") %>%
+  mutate(usa_gdp = gdpPercap) %>%
+  select(year, usa_gdp) %>%
+  filter(str_detect(year, "2$") | str_detect(year, "7$"))
+
+GDPdifference <- inner_join(asiaGDP, usaGDP, by = "year") %>%
+  mutate(gdp_difference = usa_gdp - asia_avg_gdp)
+
+ggplot(data = GDPdifference) +
+  geom_line(mapping = aes(x = year, y = gdp_difference)) +
+  xlab("Year") +
+  ylab("GDP per Capita Difference") +
+  ggtitle("GDP per Capita Difference between USA and Asian Countries Over Time", subtitle = "Asian Countries Include: China, India, Japan, Indonesia, South Korea (top 5 Asia GDP's)")
+
+#Correlation Permutation: GDP per Capita vs. Life Expectancy
+
+country_stats <- countries %>%
+  group_by(country) %>%
+  summarise(avg_lifeExp = mean(lifeExp), avg_GDP = mean(gdpPercap))
+
+continents <- countries %>%
+  select(country, continent) %>%
+  distinct()
+population <- countries %>%
+  select(country, pop) %>%
+  group_by(country) %>%
+  summarise(avg_pop = mean(pop))
+
+country_stats2 <- left_join(country_stats, continents, by = "country") %>%
+  left_join(population, by = "country")
+
+ggplot(data = country_stats2) +
+  geom_point(mapping = aes(x = avg_GDP, y = avg_lifeExp, color = continent, size = avg_pop)) +
+  labs(size = "Avg. Population", color = "Continent") +
+  xlab("Average GDP per Capita") +
+  ylab("Average Life Expectancy") +
+  ggtitle("Avg GDP per Capita vs. Avg Life Expectancy for Every Country (1952-2007)")
+```
+
 *****
 #### Who did what
 *****
