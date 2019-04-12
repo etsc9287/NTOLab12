@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ---
 title: "NTOLab12"
 author: "Ethan, Anderson, David, Ryan, Arie"
@@ -207,3 +208,215 @@ Helped Anderson with the graphing the distribution of perm mean and per cor for 
 * Anderson: Helped finalize first function, wrote conclusions
 
 * Arie: Helped with formatting and explanations, wrote questions
+=======
+---
+title: "NTOLab12"
+author: "Ethan, Anderson, David, Ryan, Arie"
+date: "4/12/2019"
+output: html_document
+---
+```{r,echo = FALSE, message=FALSE}
+library(tidyverse)
+library(gapminder)
+gapminder <- gapminder
+```
+*****
+#### Overall Questions
+*****
+* Question(Two-Sample Permutation test): From 1957-2007, how does the mean difference of GDP change over time between the United States and China, India, Japan, South Korea, and Indonesia? This question is important and interesting because over time it will show if the GDP per capita of the asain countries catch up to the GDP per capita of the United States, as well as how GDP was impacted by events in history.
+
+* Question(Correlation Permutation test): Is there a correlation bewteen GDP per capita and life expectancy? This question is important because it will give us a better understanding of which countries struggle to get better access to health care, education etc. This question is also interesting because it can help policy makers decide what action to take to advance the country they represent. 
+
+*****
+#### Two-Sample Permuatation test function
+*****
+```{r}
+perm_mean <- function(perms, values, n1)
+{
+## step one
+  result <- vector("numeric", perms)
+  
+  # Loop throught number of permutations
+  for (i in 1:perms)
+  {
+    x <- sample(1:length(values), n1)
+  
+  group1 <- values[x]
+  group2 <- values[-x]
+
+  diff <- mean(group1)-mean(group2)
+  result[i] <- diff
+    # Step 4:
+
+  }
+  # Step 5:
+ result <- as.tibble(result)
+ #print(result)
+  }
+
+#test1 <- perm_mean(1000,c(1:100),50)
+
+#ggplot(data = test1, mapping = aes(x= value))+
+ # geom_density()
+
+```
+
+*****
+#### Correlation Permutation test function
+*****
+
+```{r}
+perm_cor <- function(perms,x,y){
+  result <- vector("numeric",perms)
+
+for( i in c(1:perms))
+{
+  y <- sample(y,length(y))
+  c <- cor(x,y)
+  result[i] <- c
+}
+result <- as.tibble(result)
+#print(result)
+}
+#perm_cor(100,c(1:10),c(1:10))
+
+```
+****
+#### Pre-Permutation Analysis
+****
+```{r, echo = FALSE}
+
+countries <- gapminder::gapminder_unfiltered
+
+#Mean Difference Permutation
+
+asiaGDP <- countries %>%
+  filter(continent == "Asia") %>%
+  filter(country == "China" | country == "India" | country == "South Korea" | country == "Japan" | country == "Indonesia") %>%
+  select(country, year, gdpPercap) %>%
+  group_by(year) %>%
+  summarise(asia_avg_gdp = mean(gdpPercap))
+
+usaGDP <- countries %>%
+  filter(country == "United States") %>%
+  mutate(usa_gdp = gdpPercap) %>%
+  select(year, usa_gdp) %>%
+  filter(str_detect(year, "2$") | str_detect(year, "7$"))
+
+GDPdifference <- inner_join(asiaGDP, usaGDP, by = "year") %>%
+  mutate(gdp_difference = usa_gdp - asia_avg_gdp)
+
+ggplot(data = GDPdifference) +
+  geom_line(mapping = aes(x = year, y = gdp_difference)) +
+  xlab("Year") +
+  ylab("GDP per Capita Difference") +
+  ggtitle("GDP per Capita Difference between USA and Asian Countries Over Time", subtitle = "Asian Countries Include: China, India, Japan, Indonesia, South Korea (top 5 Asia GDP's)")
+```
+
+* Explanation: This graph relates to our first question "Is there a statistically significant difference in the means between GDP per capita of the US and average GDP per capita of the 5 largest Asian economies?".  We first calculated the average GDP per capita of China, India, Japan, South Korea, and Indonesia for each year in 5 year intervals as one column, the GDP per capita of the US for each of these years as another column, and the difference between these values as the third column.  Finally, we plotted this difference over the timespan (1952-2007) and found that it has increased at a pretty consistent rate.
+
+
+```{r, echo = FALSE}
+#Correlation Permutation: GDP per Capita vs. Life Expectancy
+
+country_stats <- countries %>%
+  group_by(country) %>%
+  summarise(avg_lifeExp = mean(lifeExp), avg_GDP = mean(gdpPercap))
+
+continents <- countries %>%
+  select(country, continent) %>%
+  distinct()
+population <- countries %>%
+  select(country, pop) %>%
+  group_by(country) %>%
+  summarise(avg_pop = mean(pop))
+
+country_stats2 <- left_join(country_stats, continents, by = "country") %>%
+  left_join(population, by = "country")
+
+ggplot(data = country_stats2) +
+  geom_point(mapping = aes(x = avg_GDP, y = avg_lifeExp, color = continent, size = avg_pop)) +
+  labs(size = "Avg. Population", color = "Continent") +
+  xlab("Average GDP per Capita") +
+  ylab("Average Life Expectancy") +
+  ggtitle("Avg GDP per Capita vs. Avg Life Expectancy for Every Country (1952-2007)")
+```
+
+* Explanation: This graph relates to our second question "Is there a correlation bewteen GDP per capita and life expectancy?" We plotted average GDP per capita on the x-axis against average life expectancy on the y-axis throughout the timeframe of 1952-2007, where each point iteslf represents each country, the color of the point represents the continent, and the size of the point represents the average population of the country. From this graph we found that there was a correlation of .6 between GDP per capita and life expectancy, implying a strong positive correlation. This makes sense because richer countries have better access to health care.  
+
+****
+#### Permutation Correlation Test
+****
+
+```{r,echo=FALSE,warning=FALSE}
+cor <- perm_cor(1000,country_stats2$avg_lifeExp, country_stats2$avg_GDP)
+r <- quantile(cor$value,.95)
+r2d2 <- cor(country_stats2$avg_lifeExp,country_stats2$avg_GDP)
+
+  
+p <- ggplot(data=cor,mapping = aes(x=value))+
+  geom_density(size = 1)+
+  geom_vline(xintercept = r,color="blue",size = 1)+geom_vline(xintercept = r2d2,color="red",size = 1)+
+  geom_point(x= r, y= 0) + annotate("text",,x=r,y=-.1,label = paste(round(r, digits=3), "= .95 Percentile"))+
+  annotate("text",,x=r2d2,y=-.1,label = paste(round(r2d2, digits=2), "actual cor")) + ggtitle("Life expectancy and GDP")
+p  
+
+```
+
+
+```{r, echo=FALSE}
+cor <- perm_cor(1000,country_stats2$avg_pop, country_stats2$avg_GDP)
+r <- quantile(cor$value,.95)
+r2d2 <- cor(country_stats2$avg_pop,country_stats2$avg_GDP)
+
+  
+p <- ggplot(data=cor,mapping = aes(x=value))+
+  geom_density(size = 1)+
+  geom_vline(xintercept = r,color="blue",size = 1)+geom_vline(xintercept = r2d2,color="red",size = 1)+
+  geom_point(x= r, y= 0) + annotate("text",x=r,y=-.1,label = paste(round(r, digits=3), "= .95 Percentile"))+
+  annotate("text",x=r2d2,y=-.1,label = paste(round(r2d2, digits=2), "actual cor"))+ ggtitle("Population and GDP")
+p 
+
+```
+
+****
+#### Permutation Mean Test
+****
+
+```{r,echo=FALSE}
+mean <- perm_mean(1000,GDPdifference$gdp_difference,(length(GDPdifference$gdp_difference))/2)
+r <- quantile(mean$value,.95)
+r2d2 <- mean(GDPdifference$gdp_difference)
+
+
+ggplot(data= mean,mapping = aes(x=value))+
+  geom_density(size = 1)+
+  geom_vline(xintercept = r,color="blue",size = 1)+ geom_vline(xintercept = r2d2,color="red",size = 1)+
+   geom_point(x= r, y= 0) + annotate("text",x=r,y=-.000005,label = paste(round(r, digits=3), "= .95 Percentile"))+
+  annotate("text",x=r2d2-1500,y=-.000005,label = paste(round(r2d2, digits=2), "actual"))
+
+```
+
+*****
+#### Conclusion
+*****
+
+* Conclusion (Correlation Permutation Test) :
+There is statistical significance of the positive correlation between life expectancy and GDP per capita. The plot conveys the average GDP and life expectancy correlation for all countries. The blue line in the plot shows the ninety-fifth percentile of our permutation correlation distriution which shows at whar point our data is significant. The red line showing our actual correlation is to the right of the blue line meaning that the actual correlation between GDP per capita and life expectancy is meaningful and positive. There is not a significant correlatino between population on GDP.
+
+
+*****
+#### Who did what
+*****
+
+* David: Wrote Permutation Mean Test Function and helped Ryan with the Permutaion Corrleation Test Function.
+Helped Anderson with the graphing the distribution of perm mean and per cor for our questions. Added vertical lines to graphs to show percentile Vs. actual. Did some overall edits. 
+
+* Ethan: Made the whole pre-permutation analysis section
+
+* Ryan: Helped finalize second function
+
+* Anderson:
+
+* Arie: Helped with formatting and explanations, wrote questions
+>>>>>>> Stashed changes
