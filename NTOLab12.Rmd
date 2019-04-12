@@ -145,7 +145,7 @@ p <- ggplot(data=cor,mapping = aes(x=value))+
  p 
 
 ```
-```{r,echo=FALSE}
+```{r, echo=FALSE}
 cor <- perm_cor(1000,country_stats2$avg_pop, country_stats2$avg_GDP)
 r <- quantile(cor$value,.95)
 r2d2 <- cor(country_stats2$avg_pop,country_stats2$avg_GDP)
@@ -187,8 +187,8 @@ Helped Anderson with the graphing the distribution of perm mean and per cor for 
 
 * Ethan:
 
-* Ryan:
+* Ryan: Helped finalize second function
 
 * Anderson:
 
-* Arie:
+* Arie: Helped with formatting and explanations, wrote questions
