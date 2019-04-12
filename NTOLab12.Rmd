@@ -10,11 +10,11 @@ library(gapminder)
 gapminder <- gapminder
 ```
 *****
-#### Overall Questions/Conclusion
+#### Overall Questions
 *****
 * Question(Two-Sample Permutation test): From 1957-2007, how does the mean difference of GDP change over time between the United States and China, India, Japan, South Korea, and Indonesia? This question is important and interesting because over time it will show if the GDP per capita of the asain countries catch up to the GDP per capita of the United States, as well as how GDP was impacted by events in history.
 
-* Question(Correlation Permutation test): Is there a correlation bewteen GDP per capita and life expectancy? This question is important because it will give us a better understanding of which countries struggle to get better access to health care, education etc. This question is also interesting because it can help policy makers decide what action to take to advance the country the represent. 
+* Question(Correlation Permutation test): Is there a correlation bewteen GDP per capita and life expectancy? This question is important because it will give us a better understanding of which countries struggle to get better access to health care, education etc. This question is also interesting because it can help policy makers decide what action to take to advance the country they represent. 
 
 *****
 #### Two-Sample Permuatation test function
@@ -181,6 +181,7 @@ ggplot(data= mean,mapping = aes(x=value))+
   annotate("text",x=r2d2-1500,y=-.000005,label = paste(round(r2d2, digits=2), "actual"))
 
 ```
+
 *****
 #### Conclusion
 *****
