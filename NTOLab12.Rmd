@@ -49,9 +49,11 @@ ggplot(data = test1, mapping = aes(x= value))+
   geom_density()
 
 ```
+
 *****
 #### Correlation Permutation Test
 *****
+
 ```{r, echo=FALSE}
 perm_cor <- function(perms,x,y){
   result <- vector("numeric",perms)
