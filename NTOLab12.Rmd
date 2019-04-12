@@ -167,6 +167,12 @@ ggplot(data= mean,mapping = aes(x=value))+
   annotate("text",x=r2d2-1500,y=-.000005,label = paste(round(r2d2, digits=2), "actual"))
 
 ```
+*****
+#### Conclusion
+*****
+
+* Conclusion (Correlation Permutation Test) :
+There is a positive correlation between life expectancy and GDP per capita. The plot coneys the average GDP and life expectancy correlation for all countries. The red line in the plot shows the ninety-fifth percentile which is all of our significant data. The blue line showing our actual correlation is to the right of the red line meaning that the actual correlation and data between GDP per capita and life expectancy is meaningful and positive.
 
 
 *****
